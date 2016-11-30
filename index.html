@@ -251,10 +251,14 @@
 <li>non-allocating linear algebra optimizations</li>
 <li>suitable as an execution backend for graphical machine learning libraries</li>
 <li>ReverseDiff doesn't need to record scalar indexing operations (a huge cost for many similar libraries)</li>
+<li>higher-order <code>map</code> and <code>broadcast</code> optimizations</li>
 </ul>
 <p><a id='Should-I-use-ReverseDiff-or-ForwardDiff?-1'></a></p>
 <h2 id="should-i-use-reversediff-or-forwarddiff">Should I use ReverseDiff or ForwardDiff?</h2>
-<p>ForwardDiff is theoretically more efficient for differentiating functions where the input dimension is less than the output dimension.</p>
+<p>ForwardDiff is theoretically more efficient for differentiating functions where the input dimension is less than the output dimension, while ReverseDiff is theoretically more efficient for differentiating functions where the output dimension is less than the input dimension.</p>
+<p>Thus, ReverseDiff is generally a better choice for gradients, but Jacobians and Hessians are trickier to determine. For example, optimized methods for computing nested derivatives might use a combination of forward-mode and reverse-mode AD.</p>
+<p>ForwardDiff is often faster than ReverseDiff for lower dimensional gradients (<code>length(input) &lt; 100</code>), or gradients of functions that are implemented as very large programs.</p>
+<p>In general, your choice of algorithms will depend on the function being differentiated, and you should benchmark different methods to see how they fare.</p>
           <aside class="copyright" role="note">
             
             Documentation built with
