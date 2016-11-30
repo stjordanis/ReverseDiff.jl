@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>ReverseDiff.jl</title>
+        <title>Limitations of ReverseDiff - ReverseDiff.jl</title>
       
       
       
@@ -19,31 +19,31 @@
     
     <meta property="og:url" content="None">
     <meta property="og:title" content="ReverseDiff.jl">
-    <meta property="og:image" content="None/./">
+    <meta property="og:image" content="None/../">
     <meta name="apple-mobile-web-app-title" content="ReverseDiff.jl">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon-e565ddfa3b.ico">
-    <link rel="icon" type="image/x-icon" href="./assets/images/favicon-e565ddfa3b.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon-e565ddfa3b.ico">
     <style>
       @font-face {
       	font-family: 'Icon';
-      	src: url('./assets/fonts/icon.eot?52m981');
-      	src: url('./assets/fonts/icon.eot?#iefix52m981')
+      	src: url('../assets/fonts/icon.eot?52m981');
+      	src: url('../assets/fonts/icon.eot?#iefix52m981')
                format('embedded-opentype'),
-      		   url('./assets/fonts/icon.woff?52m981')
+      		   url('../assets/fonts/icon.woff?52m981')
                format('woff'),
-      		   url('./assets/fonts/icon.ttf?52m981')
+      		   url('../assets/fonts/icon.ttf?52m981')
                format('truetype'),
-      		   url('./assets/fonts/icon.svg?52m981#icon')
+      		   url('../assets/fonts/icon.svg?52m981#icon')
                format('svg');
       	font-weight: normal;
       	font-style: normal;
       }
     </style>
-    <link rel="stylesheet" href="./assets/stylesheets/application-a422ff04cc.css">
+    <link rel="stylesheet" href="../assets/stylesheets/application-a422ff04cc.css">
     
     
       
@@ -60,9 +60,9 @@
       </style>
     
     
-      <link rel="stylesheet" href="./assets/Documenter.css">
+      <link rel="stylesheet" href="../assets/Documenter.css">
     
-    <script src="./assets/javascripts/modernizr-4ab42b99fd.js"></script>
+    <script src="../assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
   
@@ -94,7 +94,7 @@
             
           </span>
         
-        ReverseDiff.jl
+        Limitations of ReverseDiff
       </div>
     </div>
     
@@ -164,52 +164,30 @@
           
             
   <li>
-    <a class="current" title="Introduction" href=".">
+    <a class="" title="Introduction" href="..">
       Introduction
+    </a>
+    
+  </li>
+
+          
+            
+  <li>
+    <a class="current" title="Limitations of ReverseDiff" href="./">
+      Limitations of ReverseDiff
     </a>
     
       
         
       
       
-        <ul>
-          
-            <li class="anchor">
-              <a title="Installation" href="#installation">
-                Installation
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Why use ReverseDiff?" href="#why-use-reversediff">
-                Why use ReverseDiff?
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Should I use ReverseDiff or ForwardDiff?" href="#should-i-use-reversediff-or-forwarddiff">
-                Should I use ReverseDiff or ForwardDiff?
-              </a>
-            </li>
-          
-        </ul>
-      
     
   </li>
 
           
             
   <li>
-    <a class="" title="Limitations of ReverseDiff" href="limits/">
-      Limitations of ReverseDiff
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
-    <a class="" title="ReverseDiff API" href="api/">
+    <a class="" title="ReverseDiff API" href="../api/">
       ReverseDiff API
     </a>
     
@@ -226,35 +204,26 @@
       <article class="article">
         <div class="wrapper">
           
-          <p><a id='ReverseDiff.jl-1'></a></p>
-<h1 id="reversediffjl">ReverseDiff.jl</h1>
-<p>ReverseDiff implements methods to take <strong>gradients</strong>, <strong>Jacobians</strong>, <strong>Hessians</strong>, and higher-order derivatives of native Julia functions (or any callable object, really) using <strong>reverse mode automatic differentiation (AD)</strong>.</p>
-<p>While performance can vary depending on the functions you evaluate, the algorithms implemented by ReverseDiff <strong>generally outperform non-AD algorithms in both speed and accuracy.</strong></p>
-<p><a href="https://en.wikipedia.org/wiki/Automatic_differentiation">Wikipedia's entry on automatic differentiation</a> is a useful resource for learning about the advantages of AD techniques over other common differentiation methods (such as <a href="https://en.wikipedia.org/wiki/Numerical_differentiation">finite differencing</a>).</p>
-<p><a id='Installation-1'></a></p>
-<h2 id="installation">Installation</h2>
-<p>To install ReverseDiff, simply use Julia's package manager:</p>
-<pre><code>    julia&gt; Pkg.add(&quot;ReverseDiff&quot;)
-</code></pre>
-
-<p>The current version of ReverseDiff supports Julia v0.5 and v0.6.</p>
-<p><a id='Why-use-ReverseDiff?-1'></a></p>
-<h2 id="why-use-reversediff">Why use ReverseDiff?</h2>
-<p>Other Julia packages may provide some of these features, but only ReverseDiff provides all of them (as far as I know at the time of this writing):</p>
+          <p><a id='Limitations-of-ReverseDiff-1'></a></p>
+<h1 id="limitations-of-reversediff">Limitations of ReverseDiff</h1>
+<p>ReverseDiff works by injecting user code with new number types that record all operations that occur on them, accumulating an execution trace of the target function which can be re-run forwards and backwards to propagate new input values and derivative information. Naturally, this technique has some limitations. Here's a list of all the roadblocks we've seen users run into ("target function" here refers to the function being differentiated):</p>
 <ul>
-<li>supports most of the Julia language, including loops, recursion, and control flow</li>
-<li>user-friendly API for reusing and compiling tapes</li>
-<li>user-friendly performance annotations such as <code>@forward</code> and <code>@skip</code> (with more to come!)</li>
-<li>compatible with ForwardDiff, enabling mixed-mode AD</li>
-<li>built-in definitions leverage the benefits of ForwardDiff's <code>Dual</code> numbers (e.g. SIMD, zero-overhead arithmetic)</li>
-<li>a familiar differentiation API for ForwardDiff users</li>
-<li>non-allocating linear algebra optimizations</li>
-<li>suitable as an execution backend for graphical machine learning libraries</li>
-<li>ReverseDiff doesn't need to record scalar indexing operations (a huge cost for many similar libraries)</li>
+<li><strong>The target function can only be composed of generic Julia functions.</strong> ReverseDiff</li>
 </ul>
-<p><a id='Should-I-use-ReverseDiff-or-ForwardDiff?-1'></a></p>
-<h2 id="should-i-use-reversediff-or-forwarddiff">Should I use ReverseDiff or ForwardDiff?</h2>
-<p>ForwardDiff is theoretically more efficient for differentiating functions where the input dimension is less than the output dimension.</p>
+<p>cannot propagate derivative information through non-Julia code. Thus, your function may not work if it makes calls to external, non-Julia programs, e.g. uses explicit BLAS calls instead of <code>Ax_mul_Bx</code>-style functions.</p>
+<ul>
+<li>**The target function must be written generically enough to accept numbers of type</li>
+</ul>
+<p><code>T&lt;:Real</code> as input (or arrays of these numbers).** The function doesn't require a specific type signature, as long as the type signature is generic enough to avoid breaking this rule. This also means that any storage assigned used within the function must be generic as well.</p>
+<ul>
+<li><strong>Nested differentiation of closures is dangerous.</strong> Differentiating closures is safe, and</li>
+</ul>
+<p>nested differentation is safe, but you might be vulnerable to a subtle bug if you try to do both. See <a href="https://github.com/JuliaDiff/ForwardDiff.jl/issues/83">this ForwardDiff issue</a> for details. A fix is currently being planned for this problem.</p>
+<ul>
+<li><strong>The types of array inputs must be subtypes of <code>AbstractArray</code>.</strong></li>
+<li><strong>Array inputs that are being differentiated cannot be mutated</strong>. This also applies to any</li>
+</ul>
+<p>"descendent" arrays that must be tracked (e.g. if <code>A</code> is an immutable input array, then <code>C = A * A</code> will also be immutable). If you try to perform <code>setindex!</code> on such arrays, an error will be thrown. In the future, this restriction might be lifted. Note that arrays explicitly constructed within the target function (e.g. via <code>ones</code>, <code>similar</code>, etc.) can be mutated, as well as output arrays used when taking the Jacobian of a function of the form <code>f!(output, input....).</code></p>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -271,17 +240,33 @@
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
+        <a href=".." title="Introduction">
+          <span class="direction">
+            Previous
+          </span>
+          <div class="page">
+            <div class="button button-previous" role="button" aria-label="Previous">
+              <i class="icon icon-back"></i>
+            </div>
+            <div class="stretch">
+              <div class="title">
+                Introduction
+              </div>
+            </div>
+          </div>
+        </a>
+      
     </div>
     <div class="next">
       
-        <a href="limits/" title="Limitations of ReverseDiff">
+        <a href="../api/" title="ReverseDiff API">
           <span class="direction">
             Next
           </span>
           <div class="page">
             <div class="stretch">
               <div class="title">
-                Limitations of ReverseDiff
+                ReverseDiff API
               </div>
             </div>
             <div class="button button-next" role="button" aria-label="Next">
@@ -307,14 +292,14 @@
       </div>
     </main>
     <script>
-      var base_url = '.';
+      var base_url = '..';
       var repo_id  = 'JuliaDiff/ReverseDiff.jl';
     </script>
-    <script src="./assets/javascripts/application-997097ee0c.js"></script>
+    <script src="../assets/javascripts/application-997097ee0c.js"></script>
     
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     
-      <script src="./assets/mathjaxhelper.js"></script>
+      <script src="../assets/mathjaxhelper.js"></script>
     
     
   </body>
