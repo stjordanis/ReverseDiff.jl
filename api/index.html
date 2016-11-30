@@ -363,7 +363,7 @@ ReverseDiff.hessian!(result::DiffResult, tape::Union{HessianTape,CompiledHessian
 <p>Return a <code>GradientTape</code> instance containing a pre-recorded execution trace of <code>f</code> at the given <code>input</code>.</p>
 <p>This <code>GradientTape</code> can then be passed to <code>ReverseDiff.gradient!</code> to take gradients of the execution trace with new <code>input</code> values.</p>
 <p>See <code>ReverseDiff.gradient</code> for a description of acceptable types for <code>input</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L85-L95' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L87-L97' class='documenter-source'>source</a><br></p>
 <p><a id='ReverseDiff.JacobianTape' href='#ReverseDiff.JacobianTape'>#</a>
 <strong><code>ReverseDiff.JacobianTape</code></strong> &mdash; <em>Type</em>.</p>
 <pre><code>ReverseDiff.JacobianTape(f, input, cfg::JacobianConfig = JacobianConfig(input))
@@ -372,14 +372,14 @@ ReverseDiff.hessian!(result::DiffResult, tape::Union{HessianTape,CompiledHessian
 <p>Return a <code>JacobianTape</code> instance containing a pre-recorded execution trace of <code>f</code> at the given <code>input</code>.</p>
 <p>This <code>JacobianTape</code> can then be passed to <code>ReverseDiff.jacobian!</code> to take Jacobians of the execution trace with new <code>input</code> values.</p>
 <p>See <code>ReverseDiff.jacobian</code> for a description of acceptable types for <code>input</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L114-L124' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L116-L126' class='documenter-source'>source</a><br></p>
 <pre><code>ReverseDiff.JacobianTape(f!, output, input, cfg::JacobianConfig = JacobianConfig(output, input))
 </code></pre>
 
 <p>Return a <code>JacobianTape</code> instance containing a pre-recorded execution trace of <code>f</code> at the given <code>output</code> and <code>input</code>.</p>
 <p>This <code>JacobianTape</code> can then be passed to <code>ReverseDiff.jacobian!</code> to take Jacobians of the execution trace with new <code>input</code> values.</p>
 <p>See <code>ReverseDiff.jacobian</code> for a description of acceptable types for <code>input</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L139-L149' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L141-L151' class='documenter-source'>source</a><br></p>
 <p><a id='ReverseDiff.HessianTape' href='#ReverseDiff.HessianTape'>#</a>
 <strong><code>ReverseDiff.HessianTape</code></strong> &mdash; <em>Type</em>.</p>
 <pre><code>ReverseDiff.HessianTape(f, input, cfg::HessianConfig = HessianConfig(input))
@@ -388,15 +388,15 @@ ReverseDiff.hessian!(result::DiffResult, tape::Union{HessianTape,CompiledHessian
 <p>Return a <code>HessianTape</code> instance containing a pre-recorded execution trace of <code>f</code> at the given <code>input</code>.</p>
 <p>This <code>HessianTape</code> can then be passed to <code>ReverseDiff.hessian!</code> to take Hessians of the execution trace with new <code>input</code> values.</p>
 <p>See <code>ReverseDiff.hessian</code> for a description of acceptable types for <code>input</code>.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L170-L180' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L172-L182' class='documenter-source'>source</a><br></p>
 <p><a id='ReverseDiff.compile' href='#ReverseDiff.compile'>#</a>
 <strong><code>ReverseDiff.compile</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>ReverseDiff.compile(t::AbstractTape)
 </code></pre>
 
-<p>Return a fully compiled representation of <code>t</code>. This object can be passed to any API methods that accept <code>t</code>. In many cases, compiling <code>t</code> can significantly speed up execution time.</p>
-<p>Note that the longer the tape, the more time compilation may take. Very long tapes (i.e. when <code>length(t)</code> is on the order of 10000 elements) can take a very long time to compile.</p>
-<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L62-L70' class='documenter-source'>source</a><br></p>
+<p>Return a fully compiled representation of <code>t</code>. The type of this representation will be <code>CompiledGradient</code>/<code>CompiledJacobian</code>/<code>CompiledHessian</code>, depending on the type of <code>t</code>. This object can be passed to any API methods that accept <code>t</code>.</p>
+<p>In many cases, compiling <code>t</code> can significantly speed up execution time. Note that the longer the tape, the more time compilation may take. Very long tapes (i.e. when <code>length(t)</code> is on the order of 10000 elements) can take a very long time to compile.</p>
+<p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/9263428bc4396a40bdca0402f6e40475d560a722/src/api/tape.jl#L62-L72' class='documenter-source'>source</a><br></p>
 <p><a id='The-AbstractConfig-API-1'></a></p>
 <h2 id="the-abstractconfig-api">The <code>AbstractConfig</code> API</h2>
 <p>For the sake of convenience and performance, all "extra" information used by ReverseDiff's API methods is bundled up in the <code>ReverseDiff.AbstractConfig</code> family of types. These types allow the user to easily feed several different parameters to ReverseDiff's API methods, such as work buffers and tape configurations.</p>
