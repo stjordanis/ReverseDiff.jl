@@ -193,20 +193,20 @@
         <ul>
           
             <li class="anchor">
-              <a title="Gradients of f(x::AbstractArray{Real}...)::Real" href="#gradients-of-fxabstractarrayrealreal">
-                Gradients of f(x::AbstractArray{Real}...)::Real
+              <a title="Gradients of f(x::AbstractArray{&lt;:Real}...)::Real" href="#gradients-of-fxabstractarrayrealreal">
+                Gradients of f(x::AbstractArray{&lt;:Real}...)::Real
               </a>
             </li>
           
             <li class="anchor">
-              <a title="Jacobians of f(x::AbstractArray{Real}...)::AbstractArray{Real}" href="#jacobians-of-fxabstractarrayrealabstractarrayreal">
-                Jacobians of f(x::AbstractArray{Real}...)::AbstractArray{Real}
+              <a title="Jacobians of f(x::AbstractArray{&lt;:Real}...)::AbstractArray{&lt;:Real}" href="#jacobians-of-fxabstractarrayrealabstractarrayreal">
+                Jacobians of f(x::AbstractArray{&lt;:Real}...)::AbstractArray{&lt;:Real}
               </a>
             </li>
           
             <li class="anchor">
-              <a title="Hessians of f(x::AbstractArray{Real})::Real" href="#hessians-of-fxabstractarrayrealreal">
-                Hessians of f(x::AbstractArray{Real})::Real
+              <a title="Hessians of f(x::AbstractArray{&lt;:Real})::Real" href="#hessians-of-fxabstractarrayrealreal">
+                Hessians of f(x::AbstractArray{&lt;:Real})::Real
               </a>
             </li>
           
@@ -246,8 +246,8 @@
           
           <p><a id='ReverseDiff-API-1'></a></p>
 <h1 id="reversediff-api">ReverseDiff API</h1>
-<p><a id='Gradients-of-f(x::AbstractArray{Real}...)::Real-1'></a></p>
-<h2 id="gradients-of-fxabstractarrayrealreal">Gradients of <code>f(x::AbstractArray{Real}...)::Real</code></h2>
+<p><a id='Gradients-of-f(x::AbstractArray{:Real}...)::Real-1'></a></p>
+<h2 id="gradients-of-fxabstractarrayrealreal">Gradients of <code>f(x::AbstractArray{&lt;:Real}...)::Real</code></h2>
 <p><a id='ReverseDiff.gradient' href='#ReverseDiff.gradient'>#</a>
 <strong><code>ReverseDiff.gradient</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>ReverseDiff.gradient(f, input, cfg::GradientConfig = GradientConfig(input))
@@ -287,8 +287,8 @@
 <p>The arguments to <code>ReverseDiff.compile_gradient</code> are the same as the arguments to <code>GradientTape</code>; see <code>ReverseDiff.GradientTape</code> documentation for details.</p>
 <p>The usage restrictions on the returned function are the same as the usage restrictions for calling <code>gradient!(result, tape, input)</code> where <code>tape</code> is a compiled <code>GradientTape</code>; see <code>ReverseDiff.compile</code> for details.</p>
 <p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/331d0b52f6927075a3e0f9cada12a071665fa033/src/api/tape.jl#L83-L97' class='documenter-source'>source</a><br></p>
-<p><a id='Jacobians-of-f(x::AbstractArray{Real}...)::AbstractArray{Real}-1'></a></p>
-<h2 id="jacobians-of-fxabstractarrayrealabstractarrayreal">Jacobians of <code>f(x::AbstractArray{Real}...)::AbstractArray{Real}</code></h2>
+<p><a id='Jacobians-of-f(x::AbstractArray{:Real}...)::AbstractArray{:Real}-1'></a></p>
+<h2 id="jacobians-of-fxabstractarrayrealabstractarrayreal">Jacobians of <code>f(x::AbstractArray{&lt;:Real}...)::AbstractArray{&lt;:Real}</code></h2>
 <p><a id='ReverseDiff.jacobian' href='#ReverseDiff.jacobian'>#</a>
 <strong><code>ReverseDiff.jacobian</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>ReverseDiff.jacobian(f, input, cfg::JacobianConfig = JacobianConfig(input))
@@ -339,8 +339,8 @@
 <p>The arguments to <code>ReverseDiff.compile_jacobian</code> are the same as the arguments to <code>JacobianTape</code>; see <code>ReverseDiff.JacobianTape</code> documentation for details. Note that this means <code>ReverseDiff.compile_jacobian</code> also supports target functions of the form <code>f!(output, input)</code>.</p>
 <p>The usage restrictions on the returned function are the same as the usage restrictions for calling <code>jacobian!(result, tape, input)</code> where <code>tape</code> is a compiled <code>JacobianTape</code>; see <code>ReverseDiff.compile</code> for details.</p>
 <p><a target='_blank' href='https://github.com/JuliaDiff/ReverseDiff.jl/tree/331d0b52f6927075a3e0f9cada12a071665fa033/src/api/tape.jl#L103-L119' class='documenter-source'>source</a><br></p>
-<p><a id='Hessians-of-f(x::AbstractArray{Real})::Real-1'></a></p>
-<h2 id="hessians-of-fxabstractarrayrealreal">Hessians of <code>f(x::AbstractArray{Real})::Real</code></h2>
+<p><a id='Hessians-of-f(x::AbstractArray{:Real})::Real-1'></a></p>
+<h2 id="hessians-of-fxabstractarrayrealreal">Hessians of <code>f(x::AbstractArray{&lt;:Real})::Real</code></h2>
 <p><a id='ReverseDiff.hessian' href='#ReverseDiff.hessian'>#</a>
 <strong><code>ReverseDiff.hessian</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>ReverseDiff.hessian(f, input::AbstractArray, cfg::HessianConfig = HessianConfig(input))
